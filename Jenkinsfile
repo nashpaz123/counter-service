@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     try {
-                    sh """pwd
+                        sh """pwd
                           ls -l
                           docker ps -a
                           
@@ -39,11 +39,12 @@ pipeline {
                     } catch (Exception e) {
                         echo 'nothing to stop, nothing gained nothing lost'
                     }
+                }
                 docker run --name redis -d redis
                 docker ps -a
 
 
-                }
+
             }
         }
 
