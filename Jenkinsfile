@@ -21,7 +21,7 @@ pipeline {
                     sh """pwd
                           ls -l
                           
-                          docker stop \$(docker ps -a -q --filter ancestor=counter_1.0) 
+                          docker stop `docker ps -a -q --filter ancestor=counter_1.0` 
                           docker ps -a
                           """
                 }
