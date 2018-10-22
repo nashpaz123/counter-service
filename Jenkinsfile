@@ -8,6 +8,7 @@ pipeline {
                     sh """pwd
                           ls -l
                           
+                          cd app                          
                           docker build -t counter_1.0 . 
                           """
                 }
