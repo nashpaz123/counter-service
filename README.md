@@ -1,7 +1,8 @@
 # counter-service
 This is a flask delivered python counter-service, dockerized web app. 
 The running app is available via port 80 on the Ubuntu 16 slave: http://ec2-34-253-223-252.eu-west-1.compute.amazonaws.com/
-The app runs a redis service, and generates a link between it and the flask web delivery service. The flask reads out text with a number of redis hits. A future implementation can allow for the redis service to keep running and save the number of hits, regardless of whether the web app is running or not.
+
+The app runs a redis service, and generates a link between it and the flask web delivery service. The flask+pyhton app reads out text with a number of redis hits. A future implementation can allow for the redis service to keep running and save the number of hits, regardless of whether the web app is running or not.
 
 Usage:
 1. On a Jenkins master, you need a Jenkins slave running docker 17 or greater, labeled "aws_ubuntu16".
