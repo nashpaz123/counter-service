@@ -31,6 +31,7 @@ pipeline {
                     sh """pwd
                           ls -l
                           
+                          docker rm `docker ps -a |grep redis | awk '{print \$1}'`
                           docker stop `docker ps -a |grep nash | awk '{print \$1}'` 
                           docker ps -a
                           """
@@ -45,10 +46,14 @@ pipeline {
         stage ("3. Deploy"){
             steps {
                 script {
+                    redis_alive =
+
+                docker run --name redis -d redis
+                script {
                     sh """pwd
                           ls -l
                           
-                          docker run -d -p 4000:80 nash/repo1:tag_1.0.1
+                          docker run --name web --link redis:redis -p 5000:80 -d nash/repo1:tag_1.0.1 python app.py
                           docker ps -a
                           """
                 }
