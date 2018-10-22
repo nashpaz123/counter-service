@@ -26,7 +26,6 @@ pipeline {
         stage ("2. Stop existing, prep redis"){
             steps {
                 script {
-
                     try {
                     sh """pwd
                           ls -l
@@ -34,7 +33,6 @@ pipeline {
                           docker rm `docker ps -a |grep redis | awk '{print \$1}'`
                           docker stop `docker ps -a |grep nash | awk '{print \$1}'`
                           docker run --name redis -d redis
-                           
                           docker ps -a
                           """
                     } catch (Exception e) {
