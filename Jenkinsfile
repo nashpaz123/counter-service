@@ -29,6 +29,7 @@ pipeline {
                     try {
                     sh """pwd
                           ls -l
+                          docker ps -a
                           
                           docker rm `docker ps -a |grep redis | awk '{print \$1}'`
                           docker stop `docker ps -a |grep nash | awk '{print \$1}'`
