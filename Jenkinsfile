@@ -40,11 +40,11 @@ pipeline {
                         echo 'nothing to stop, nothing gained nothing lost'
                     }
                 }
-                docker run --name redis -d redis
-                docker ps -a
-
-
-
+                script {
+                    sh """docker run --name redis -d redis
+                          docker ps -a
+                          """
+                }
             }
         }
 
