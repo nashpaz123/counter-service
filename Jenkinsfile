@@ -33,6 +33,7 @@ pipeline {
                           docker rm `docker ps -a |grep redis | awk '{print \$1}'`
                           docker stop `docker ps -a |grep nash | awk '{print \$1}'`
                           docker run --name redis -d redis
+                          
                           docker ps -a
                           """
                     } catch (Exception e) {
@@ -45,7 +46,6 @@ pipeline {
 
         stage ("3. Deploy"){
             steps {
-                docker run --name redis -d redis
                 script {
                     sh """pwd
                           ls -l
