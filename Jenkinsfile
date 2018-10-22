@@ -4,7 +4,7 @@ pipeline {
     parameters {choice(name: 'Build_Image', choices: "Yey\nDont_build", description: 'Do you wannna build a snow ma.. I mean, run the build tag push stage')}
 
     stages {
-        stage ("1. Build image, tag and set in repo"){
+        stage ("Build and tags image"){
             when { // Only builds if Build_Image is required
                 expression { params.Build_Image == 'Yey' }
             }
@@ -23,7 +23,7 @@ pipeline {
                 }
             }
 
-        stage ("2. Stop existing, prep redis"){
+        stage ("Stop existing, prep redis"){
             steps {
                 script {
                     try {
@@ -48,21 +48,20 @@ pipeline {
             }
         }
 
-        stage ("3. Deploy"){
+        stage ("Deploy"){
             steps {
                 script {
+                    sh """pwd
+                          ls -l
 
-//                    sh """pwd
-//                          ls -l
-//
-//                          docker run --link redis:redis -p 80:80 -d nash/repo1:tag_1.0.1 python app.py
-//                          docker ps -a
-//                          """
+                          docker run --link redis:redis -p 80:80 -d nash/repo1:tag_1.0.1 python app.py
+                          docker ps -a
+                          """
                 }
             }
         }
 
-        stage ("3. Test"){
+        stage ("Test"){
             steps {
                 script {
                     sh """                    
