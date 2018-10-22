@@ -18,6 +18,7 @@ pipeline {
         stage ("2. stop existing containers"){
             steps {
                 script {
+
                     try {
                     sh """pwd
                           ls -l
@@ -28,7 +29,7 @@ pipeline {
                     } catch (Exception e) {
                         echo 'nothing gained nothing lost'
                     }
-                    }
+
                 }
             }
         }
