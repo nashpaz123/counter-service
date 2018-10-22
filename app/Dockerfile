@@ -9,7 +9,6 @@ COPY . /app
 
 # Install needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
 
 EXPOSE 80
 
