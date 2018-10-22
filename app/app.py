@@ -1,10 +1,14 @@
 from flask import Flask
-app = Flask(__name__)
+from redis import Redis
+import os
 
+app = Flask(__name__)
+redis = Redis(host='redis', port=6379)
 
 @app.route('/')
-def nookvar():
-    return 'Flask Dockerized'
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+def hello():
+    redis.incr('hits')
+    return 'Been hit %i times.\n' % int(redis.get('hits'))
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80, debug=True)

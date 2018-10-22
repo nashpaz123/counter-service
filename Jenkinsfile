@@ -4,7 +4,7 @@ pipeline {
     parameters {choice(name: 'Build_Image', choices: "Dont_build\nYey", description: 'Do you wannna build a snow ma.. I mean, run the build tag push stage')}
 
     stages {
-        stage ("1. build image, tag and set in repo"){
+        stage ("1. Build image, tag and set in repo"){
             when { // Only builds if Build_Image is required
                 expression { params.Build_Image == 'Yey' }
             }
@@ -23,7 +23,7 @@ pipeline {
                 }
             }
 
-        stage ("2. stop existing containers"){
+        stage ("2. Stop existing containers"){
             steps {
                 script {
 
@@ -42,7 +42,7 @@ pipeline {
             }
         }
 
-        stage ("3. run"){
+        stage ("3. Deploy"){
             steps {
                 script {
                     sh """pwd
@@ -50,6 +50,16 @@ pipeline {
                           
                           docker run -d -p 4000:80 nash/repo1:tag_1.0.1
                           docker ps -a
+                          """
+                }
+            }
+        }
+
+        stage ("3. Test"){
+            steps {
+                script {
+                    sh """                    
+                          curl http://localhost:80
                           """
                 }
             }

@@ -1,6 +1,9 @@
 app:
   build: ./app
+  command: python app.py
   ports:
    - "80:5000"
-  volumes:
-   - .:/code
+  links:
+   - redis
+redis:
+  image: redis:latest
