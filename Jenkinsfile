@@ -10,13 +10,13 @@ pipeline {
             }
                 steps {
                     script {
+                        // TO DO: Set a when { branch 'master' } for the push to docker.io
                         sh """pwd
                               ls -l
                               
                               cd app                          
                               docker build -t counter_1.0.1 . 
                               docker tag counter_1.0.1 nash/repo1:tag_1.0.1
-                              #The next line (push to docker.io) won't run in dev. Set a when { branch 'master' } for it  
                               #docker push nash/repo1:tag_1.0.1
                               """
                     }
