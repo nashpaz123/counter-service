@@ -18,12 +18,17 @@ pipeline {
         stage ("2. stop existing containers"){
             steps {
                 script {
+                    try {
                     sh """pwd
                           ls -l
                           
                           docker stop `docker ps -a -q --filter ancestor=counter_1.0` 
                           docker ps -a
                           """
+                    } catch (Exception e) {
+                        echo 'nothing gained nothing lost'
+                    }
+                    }
                 }
             }
         }
