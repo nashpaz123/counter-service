@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'aws_ubuntu16' }
 
-    parameters {choice(name: 'Build_Image', choices: "Dont_build\nYey", description: 'Do you wannna build a snow ma.. I mean, run the build tag push stage')}
+    parameters {choice(name: 'Build_Image', choices: "Yey\nDont_build", description: 'Do you wannna build a snow ma.. I mean, run the build tag push stage')}
 
     stages {
         stage ("1. Build image, tag and set in repo"){
@@ -51,12 +51,13 @@ pipeline {
         stage ("3. Deploy"){
             steps {
                 script {
-                    sh """pwd
-                          ls -l
 
-                          docker run --link redis:redis -p 80:80 -d nash/repo1:tag_1.0.1 python app.py
-                          docker ps -a
-                          """
+//                    sh """pwd
+//                          ls -l
+//
+//                          docker run --link redis:redis -p 80:80 -d nash/repo1:tag_1.0.1 python app.py
+//                          docker ps -a
+//                          """
                 }
             }
         }
