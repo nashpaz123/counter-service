@@ -33,8 +33,7 @@ pipeline {
                           
                           docker stop `docker ps -a |grep redis | awk '{print \\\$1}'`
                           docker rm `docker ps -a |grep redis | awk '{print \$1}'`
-                          docker stop `docker ps -a |grep web | awk '{print \$1}'`
-                          docker rm `docker ps -a |grep web | awk '{print \\\$1}'`
+                          docker stop `docker ps -a |grep nash | awk '{print \$1}'`
                           
                           """
                     } catch (Exception e) {
@@ -55,7 +54,7 @@ pipeline {
                     sh """pwd
                           ls -l
 
-                          docker run --link redis:redis -p 5000:80 -d nash/repo1:tag_1.0.1 python app.py
+                          docker run --link redis:redis -p 80:80 -d nash/repo1:tag_1.0.1 python app.py
                           docker ps -a
                           """
                 }
