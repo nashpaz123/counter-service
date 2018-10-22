@@ -31,15 +31,17 @@ pipeline {
                           ls -l
                           docker ps -a
                           
+                          docker stop `docker ps -a |grep redis | awk '{print \\\$1}'`
                           docker rm `docker ps -a |grep redis | awk '{print \$1}'`
                           docker stop `docker ps -a |grep nash | awk '{print \$1}'`
-                          docker run --name redis -d redis
                           
-                          docker ps -a
                           """
                     } catch (Exception e) {
                         echo 'nothing to stop, nothing gained nothing lost'
                     }
+                docker run --name redis -d redis
+                docker ps -a
+
 
                 }
             }
